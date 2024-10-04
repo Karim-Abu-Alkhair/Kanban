@@ -13,39 +13,35 @@ const Card: React.FC<CardProps> = ({ item, index, onClick, onDelete }) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className="bg-white border border-gray-200 rounded-lg p-3 mb-3 shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out"
+          className="bg-white border border-gray-200 rounded-lg p-4 mb-4 shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out"
         >
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-base md:text-lg font-bold truncate">
+            <h3 className="text-lg font-bold">
               {item.content.title}. {item.content.name}
             </h3>
-            <p className="text-xs md:text-sm text-gray-500">
-              {item.content.age} yo
-            </p>
+            <p className="text-sm text-gray-500">{item.content.age} yo</p>
           </div>
-          <p className="mb-1 text-sm font-semibold truncate">
-            {item.content.email}
-          </p>
-          <p className="text-sm text-gray-500 truncate">{item.content.phone}</p>
-          <div className="flex justify-end mt-2">
-            <button
-              className="p-1 rounded-full hover:bg-gray-100 text-blue-500 mr-2"
+          <p className="mb-1 font-semibold">{item.content.email}</p>
+          <p className="text-gray-500">{item.content.phone}</p>
+          <div className="flex justify-end mb-2">
+            <div
+              className="p-2 rounded-full hover:bg-gray-100 cursor-pointer text-blue-500"
               onClick={(e) => {
                 e.stopPropagation();
                 onClick();
               }}
             >
               <EditIcon />
-            </button>
-            <button
-              className="p-1 rounded-full hover:bg-gray-100 text-red-500"
+            </div>
+            <div
+              className="p-2 rounded-full hover:bg-gray-100 cursor-pointer text-red-500"
               onClick={(e) => {
                 e.stopPropagation();
                 onDelete();
               }}
             >
               <DeleteIcon />
-            </button>
+            </div>
           </div>
         </div>
       )}

@@ -1,12 +1,6 @@
 import React from "react";
 import { Field, ErrorMessage } from "formik";
-
-interface InputFieldProps {
-  name: string;
-  label: string;
-  type?: string;
-  placeholder?: string;
-}
+import { InputFieldProps } from "./InputFieldProps.types";
 
 const InputField: React.FC<InputFieldProps> = ({
   name,

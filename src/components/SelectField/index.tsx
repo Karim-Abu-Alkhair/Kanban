@@ -1,16 +1,7 @@
 import React from "react";
 import { Field, ErrorMessage } from "formik";
 
-interface Option {
-  value: string;
-  label: string;
-}
-
-interface SelectFieldProps {
-  name: string;
-  label: string;
-  options: Option[];
-}
+import { SelectFieldProps } from "./SelectFiledProps.types";
 
 const SelectField: React.FC<SelectFieldProps> = ({ name, label, options }) => {
   return (

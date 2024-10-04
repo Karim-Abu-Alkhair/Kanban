@@ -1,10 +1,8 @@
 import React from "react";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { ClientFormProps, ClientValues } from "./ClientForm.types";
 import { TITLE } from "../../utils/Constants";
-import InputField from "../InputField";
-import SelectField from "../SelectField";
 
 const ClientForm: React.FC<ClientFormProps> = ({
   onAddClient,
@@ -37,21 +35,16 @@ const ClientForm: React.FC<ClientFormProps> = ({
     phone: "",
   };
 
-  const titleOptions = Object.entries(TITLE).map(([key, value]) => ({
-    value: key,
-    label: value,
-  }));
-
   return (
     <Formik
       initialValues={initialValues || defaultValues}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ isValid, dirty }) => (
+      {({ errors, touched }) => (
         <Form className="space-y-4">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg md:text-xl font-bold">
+            <h2 className="text-xl font-bold">
               {initialValues ? "Edit Client" : "Add Client"}
             </h2>
             <button
@@ -60,7 +53,7 @@ const ClientForm: React.FC<ClientFormProps> = ({
               onClick={() => setIsModalOpen(false)}
             >
               <svg
-                className="h-5 w-5 md:h-6 md:w-6"
+                className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -74,29 +67,67 @@ const ClientForm: React.FC<ClientFormProps> = ({
               </svg>
             </button>
           </div>
-          <SelectField name="title" label="Title" options={titleOptions} />
-          <InputField name="name" label="Name" placeholder="Enter name" />
-          <InputField
-            name="age"
-            label="Age"
-            type="number"
-            placeholder="Enter age"
-          />
-          <InputField
-            name="email"
-            label="Email"
-            type="email"
-            placeholder="Enter email"
-          />
-          <InputField
-            name="phone"
-            label="Phone"
-            placeholder="Enter phone number"
-          />
+          <div>
+            <Field
+              as="select"
+              name="title"
+              className="w-full p-2 border rounded"
+            >
+              {Object.entries(TITLE).map(([key, value]) => (
+                <option key={key} value={key}>
+                  {value}
+                </option>
+              ))}
+            </Field>
+            {errors.title && touched.title && (
+              <div className="text-red-500">{errors.title}</div>
+            )}
+          </div>
+          <div>
+            <Field
+              name="name"
+              placeholder="Name"
+              className="w-full p-2 border rounded"
+            />
+            {errors.name && touched.name && (
+              <div className="text-red-500">{errors.name}</div>
+            )}
+          </div>
+          <div>
+            <Field
+              name="age"
+              placeholder="Age"
+              type="number"
+              className="w-full p-2 border rounded"
+            />
+            {errors.age && touched.age && (
+              <div className="text-red-500">{errors.age}</div>
+            )}
+          </div>
+          <div>
+            <Field
+              name="email"
+              placeholder="Email"
+              type="email"
+              className="w-full p-2 border rounded"
+            />
+            {errors.email && touched.email && (
+              <div className="text-red-500">{errors.email}</div>
+            )}
+          </div>
+          <div>
+            <Field
+              name="phone"
+              placeholder="Phone"
+              className="w-full p-2 border rounded"
+            />
+            {errors.phone && touched.phone && (
+              <div className="text-red-500">{errors.phone}</div>
+            )}
+          </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
-            disabled={!isValid || !dirty}
+            className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
           >
             {initialValues ? "Update Client" : "Add Client"}
           </button>
