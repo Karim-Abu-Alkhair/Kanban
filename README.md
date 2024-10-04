@@ -73,3 +73,4 @@ This project is a Kanban board application built with React, TypeScript, and Tai
 - To add a new client, click the "Add Client" button in the first column.
 - To edit or delete a client, use the respective icons on each client card.
 - Drag and drop client cards between columns to update their status.
+- live : https://kanban-apes.netlify.app/
